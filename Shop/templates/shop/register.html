@@ -1,15 +1,73 @@
-{% extends 'shop/layouts/main.html'%}
+{% extends 'shop/layouts/main.html' %}
 {% block title %}
-register
+  Registration | ShopHere
 {% endblock title %}
 {% block content %}
-<div class="container" style="margin-top: 70px;">
+  <div class="container" style="margin-top:70px;min-height:600px;">
     <div class="row">
-        <div class="col-12">
-            <h1>register page</h1>
-
-
-        </div>
+      <div class="col-12">
+        <h4 class="mb-3 fw-bold text-center"> New User Registration</h4>
+        <hr style="border-color:#b8bfc2;">
+        {% include 'shop/inc/message.html' %}
+      </div>
     </div>
-</div>
+    <section class="py-4" >
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="mb-4">
+                <label for="" class="form-label text-primary fw-bold fs-5">User Name</label>
+                {{form.username}}
+              </div>
+              <div class="mb-4">
+                <label for="" class="form-label text-primary fw-bold fs-5">User Email</label>
+                {{form.email}}
+              </div>
+              <div class="mb-4">
+                <label for="" class="form-label text-primary fw-bold fs-5">Password</label>
+                {{form.password1}}
+              </div>
+              <div class="mb-4">
+                <label for="" class="form-label text-primary fw-bold fs-5">Confirm Password</label>
+                {{form.password2}}
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Register</button>              
+              </div>
+            </form>
+            <p class="my-2">Already user ? <a href="{% url 'login' %}">Login Now</a> </p>
+          </div>
+          <div class="col-6">
+            
+                {% if form.errors.username %}
+                <div class="mb-4">
+                  <label class="text-danger d-block">{{ form.errors.username }}</label>
+                </div>
+                {% endif %}
+            
+                {% if form.errors.email %}
+                <div class="mb-4">
+                  <label class="text-danger d-block">{{ form.errors.email }}</label>
+                </div>
+                {% endif %}
+              
+                {% if form.errors.password1 %}
+                <div class="mb-4">
+                  <label class="text-danger d-block">{{ form.errors.password1 }}</label>
+                </div>
+                {% endif %}
+              
+                {% if form.errors.password2 %}
+                <div class="mb-4">
+                  <label class="text-danger d-block">{{ form.errors.password2 }}</label>
+                </div>
+                {% endif %}
+              
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 {% endblock content %}
